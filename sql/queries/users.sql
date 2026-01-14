@@ -9,6 +9,21 @@ VALUES (
 )
 RETURNING *;
 
+-- name: UpdateUser :one
+UPDATE users
+  set updated_at = NOW(),
+  email = $2,
+  hashed_password = $3
+WHERE id = $1
+RETURNING *;
+
+-- name: UpdateUserChirpyRed :one
+UPDATE users
+  set updated_at = NOW(),
+  is_chirpy_red = TRUE
+WHERE id = $1
+RETURNING *;
+
 -- name: DeleteUsers :exec
 DELETE FROM users;
 
